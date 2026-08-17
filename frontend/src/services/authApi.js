@@ -11,9 +11,7 @@ const authApi = axios.create({
   },
 });
 
-// ==========================================
-// REGISTER
-// ==========================================
+
 
 export const registerUser = async (userData) => {
   const response = await authApi.post(
@@ -24,9 +22,7 @@ export const registerUser = async (userData) => {
   return response.data;
 };
 
-// ==========================================
-// LOGIN
-// ==========================================
+
 
 export const loginUser = async (userData) => {
   const response = await authApi.post(
@@ -37,9 +33,7 @@ export const loginUser = async (userData) => {
   return response.data;
 };
 
-// ==========================================
-// GET CURRENT USER
-// ==========================================
+
 
 export const getCurrentUser = async (token) => {
   const response = await authApi.get(
