@@ -18,7 +18,7 @@ const allowedOrigins = [
 app.use(
   cors({
     origin: function (origin, callback) {
-
+      
       if (!origin) {
         return callback(null, true);
       }
@@ -29,9 +29,7 @@ app.use(
 
       console.log("Blocked CORS origin:", origin);
 
-      return callback(
-        new Error("Not allowed by CORS")
-      );
+      return callback(new Error("Not allowed by CORS"));
     },
 
     credentials: true,
@@ -52,56 +50,32 @@ app.use(
   })
 );
 
+
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  express.urlencoded({
-    extended: true,
-  })
-);
 
-app.use(
-  "/api/auth",
-  authRoutes
-);
-
-app.use(
-  "/api/weather",
-  weatherRoutes
-);
+app.use("/api/auth", authRoutes);
+app.use("/api/weather", weatherRoutes);
 
 app.get("/", (req, res) => {
   res.json({
     success: true,
-    message: "Weather API is running",
+    message: "Weather App Backend is running",
   });
 });
-
 
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-
     console.log("MongoDB Connected");
 
-    const PORT =
-      process.env.PORT || 5000;
+    const PORT = process.env.PORT || 5000;
 
-    app.listen(
-      PORT,
-      "0.0.0.0",
-      () => {
-        console.log(
-          `Server running on port ${PORT}`
-        );
-      }
-    );
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
+    });
   })
   .catch((error) => {
-
-    console.error(
-      "MongoDB connection error:",
-      error
-    );
-
+    console.error("MongoDB connection error:", error);
   });
