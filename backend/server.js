@@ -12,7 +12,7 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://climora-weather-gczowcrv1-anshi.vercel.app",
+  "https://climora-weather-app-chi.vercel.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
