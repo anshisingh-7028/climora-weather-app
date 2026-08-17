@@ -12,13 +12,13 @@ const app = express();
 
 const allowedOrigins = [
   "http://localhost:5173",
+  "https://climora-weather-gczowcrv1-anshi.vercel.app",
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      
       if (!origin) {
         return callback(null, true);
       }
@@ -28,29 +28,16 @@ app.use(
       }
 
       console.log("Blocked CORS origin:", origin);
-
       return callback(new Error("Not allowed by CORS"));
     },
 
     credentials: true,
 
-    methods: [
-      "GET",
-      "POST",
-      "PUT",
-      "DELETE",
-      "PATCH",
-      "OPTIONS",
-    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-    ],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
